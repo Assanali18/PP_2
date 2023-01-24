@@ -1,0 +1,5 @@
+n = int(input())
+k= int(input())
+n1 = int(input())
+k1= int(input())
+print('YES' if (n+k)%2 == (n1+k1)%2  else 'NO')

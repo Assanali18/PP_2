@@ -1,0 +1,5 @@
+col_1 = int(input())
+li_1 = int(input())
+col_2 = int(input())
+li_2 = int(input())
+print( 'YES' if col_2 - col_1 == li_2 -li_1 or col_1 - col_2 == li_1 - li_2 or col_2 - col_1 == li_1 -li_2 or col_1 - col_2 == li_2 -li_1 or (col_1 == col_2 or li_1 == li_2) else 'NO')

@@ -1,3 +1,9 @@
+# Python does not have built-in support for Arrays
+# Может хранить только один тип данных
+# Use []
+
+
+
 cars = ["Ford", "Volvo", "BMW"]
 print(cars) # ['Ford', 'Volvo', 'BMW']
 

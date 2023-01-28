@@ -1,3 +1,5 @@
+#Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
+
 thislist = ('apple', 'banana', 'cherry', 'apple', 'cherry')
 print(thislist) #('apple', 'banana', 'cherry', 'apple', 'cherry')
 

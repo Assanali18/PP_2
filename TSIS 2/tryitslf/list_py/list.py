@@ -1,3 +1,7 @@
+# List items are ordered, changeable, and allow duplicate values.
+# A list can contain different data types
+
+
 thislist = ["apple", "banana", "cherry"]
 print(thislist)
 ######

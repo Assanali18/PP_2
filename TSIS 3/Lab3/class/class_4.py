@@ -3,7 +3,6 @@ class Point:
     mass = []
     print('Enter the cordinates: ')
     for i in range(4):
-        ind, ind1 = 1, 1
         print('x1: ', end = '') if i == 0  else print('y1: ', end = '') if i == 1 else print('x2: ', end = '')  if i == 2 else print('y1: ', end = '')
         mass.append(int(input()))
         
@@ -28,12 +27,13 @@ class Point:
 Point()
 display = ''
 while display != '4':
-    display = input('''What do you want?: 
-    1 - show
-    2 - change
-    3 - find distance'
-    4 - stop
-    I want: ''')
+    display = input('''
+What do you want?: 
+1 - show
+2 - change
+3 - find distance'
+4 - stop
+I want: ''')
     if display == '1':Point().show()
     elif display == '2':Point().move()
     elif display == '3':Point().dist()

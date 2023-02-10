@@ -7,6 +7,6 @@ def has_33(nums):
     print('False')
     return False
 
-has_33([1, 3, 3]) 
-has_33([1, 3, 1, 3]) 
+a = [int(i) for  i in input().split()]
+has_33(a) 
 has_33([3, 1, 3]) 

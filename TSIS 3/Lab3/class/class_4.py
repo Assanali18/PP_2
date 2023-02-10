@@ -3,7 +3,7 @@ class Point:
     mass = []
     print('Enter the cordinates: ')
     for i in range(4):
-        print('x1: ', end = '') if i == 0  else print('y1: ', end = '') if i == 1 else print('x2: ', end = '')  if i == 2 else print('y1: ', end = '')
+        print('x1: ', end = '') if i == 0  else print('y1: ', end = '') if i == 1 else print('x2: ', end = '')  if i == 2 else print('y2: ', end = '')
         mass.append(int(input()))
         
 
@@ -31,7 +31,7 @@ while display != '4':
 What do you want?: 
 1 - show
 2 - change
-3 - find distance'
+3 - find distance
 4 - stop
 I want: ''')
     if display == '1':Point().show()

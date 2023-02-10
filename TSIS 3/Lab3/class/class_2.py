@@ -1,5 +1,6 @@
 class Shape():
     def Area(self):
+
         print('Square:', self.area)
 
 class Square(Shape):

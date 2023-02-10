@@ -19,4 +19,5 @@ from f_1_9 import volume
 from f_1_11 import palindrome
 from f_1_12 import hystogram
 from f_1_13 import play
+play()
 

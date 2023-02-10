@@ -1,6 +1,7 @@
+import random
 def play():
-    import random
     x, cnt = int(random.randint(1, 20)), 0
+    print('Hello')
     print('Well,', input('Hello! What is your name? \n') + ', I am thinking of a number between 1 and 20.')
     a = int(input('Take a guess. \n' ))
     while a!=x:
@@ -13,4 +14,6 @@ def play():
             a = int(input('Take a guess. \n' ))
             cnt+=1
         if a ==x: 
-            print('Good job, KBTU! You guessed my number in {} guesses!'.format(cnt))
+            print('Good job, You guessed my number in {} guesses!'.format(cnt))
+    
+play()

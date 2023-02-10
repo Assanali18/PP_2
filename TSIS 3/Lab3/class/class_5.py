@@ -19,10 +19,10 @@ while dis != '4':
 I want: ''')
     if dis == '1': Account().bank()
     elif dis == '2': 
-        In = int(input('Name the amount you want to deposit: '))
+        In = int(input('Enter the amount you want to deposit: '))
         Account().deposit(In)
     elif dis == '3': 
-        out = int(input('Name the amount you want to withdraw: '))
+        out = int(input('Enter the amount you want to withdraw: '))
         Account().withdraw(out)
     elif dis == '4': exit()
 

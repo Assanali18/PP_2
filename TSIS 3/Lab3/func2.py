@@ -139,6 +139,6 @@ I want: ''')
     elif dis == '3': categ(input('Print your category: ').lower())
     elif dis == '4': aver()
     elif dis =='5': aver_categ(input('Print your category: ').lower())
-    elif dis =='6': exit()
+    else: exit()
 
 

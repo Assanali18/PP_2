@@ -3,4 +3,4 @@ class toUpper:
         self.inp = input()
     def printString(self):
         print((self.inp).upper())
-toUpper()
+toUpper().printString()

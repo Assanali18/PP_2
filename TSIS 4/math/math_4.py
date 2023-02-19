@@ -1,0 +1,1 @@
+print("Expected Output: ",float(input("Length of base: ")) *float(input("Height of parallelogram: ")))

@@ -12,9 +12,9 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 
 # Загрузка изображений стрелок и часов
-clock_image = pygame.image.load("atributes\images\mainclock.PNG")
-hour_image = pygame.image.load("atributes\images\hourIMG.png")
-minute_image = pygame.image.load("atributes\images\minIMG.png")
+clock_image = pygame.image.load("atributes\images_task1\mainclock.PNG")
+hour_image = pygame.image.load("atributes\images_task1\hourIMG.png")
+minute_image = pygame.image.load("atributes\images_task1\minIMG.png")
 
 # Создание библеотеки с системой времени
 clock60 = dict(zip(range(60), range(0,360, 6)))

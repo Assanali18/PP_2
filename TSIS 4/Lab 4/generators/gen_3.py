@@ -9,7 +9,6 @@ def gensequence(N):
 
 N= int(input())
 for i in gensequence(N):
-
     if cnt != 0:
         cnt-=1
         print(i, end = ' ')

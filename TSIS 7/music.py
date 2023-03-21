@@ -11,8 +11,8 @@ window.fill(pygame.Color('aliceblue'))
 pygame.display.set_caption("Pygame Music Player")
 
 # Пути
-music_folder = r"C:\PP2_tasks\TSIS 7\atributes\task 2\music"
-cover_folder = r'C:\PP2_tasks\TSIS 7\atributes\task 2\cover_images'
+music_folder = r"C:\PP2_tasks\TSIS 7\atributes\task2\music"
+cover_folder = r'C:\PP2_tasks\TSIS 7\atributes\task2\cover_images'
 music_files = os.listdir(music_folder)
 cover_files = os.listdir(cover_folder)
 
@@ -28,16 +28,16 @@ pygame.mixer.music.load(os.path.join(music_folder, music_files[current_track]))
 pygame.mixer.music.play()
 
 # Load the icons
-forw = pygame.image.load(r'atributes\task 2\icons\forw.png')
+forw = pygame.image.load(r'atributes\task2\icons\forw.png')
 forw_rect = forw.get_rect(topleft =  (125,325))
 window.blit(forw, forw_rect)
-stop = pygame.image.load(r'atributes\task 2\icons\pause.png')
+stop = pygame.image.load(r'atributes\task2\icons\pause.png')
 stop_rect = stop.get_rect(topleft =  (200,325))
 window.blit(stop, stop_rect)
-play = pygame.image.load(r'atributes\task 2\icons\play.png')
+play = pygame.image.load(r'atributes\task2\icons\play.png')
 play_rect = play.get_rect(topleft =  (275,325))
 window.blit(play, play_rect)
-back = pygame.image.load(r'atributes\task 2\icons\back.png')
+back = pygame.image.load(r'atributes\task2\icons\back.png')
 back_rect = back.get_rect(topleft =  (350,325))
 window.blit(back, back_rect)
 

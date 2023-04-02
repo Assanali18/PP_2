@@ -26,7 +26,7 @@ font_small = pygame.font.SysFont("Arial", 26)
 end = font.render("GAME OVER", True, ORANGE)
 
 # Background atributes 
-background = pygame.image.load(r"atributes\snake\new.bg.jpg")
+background = pygame.image.load(r"atributes\snake_folder\new.bg.jpg")
 background = pygame.transform.scale(background, (screen_w,screen_h))
 # pygame.mixer.music.load(r'atributes\bg_snake_sound.mp3')
 # pygame.mixer.music.play()
@@ -37,14 +37,14 @@ pygame.display.set_caption('Snake')
 
 class Fruit:
     def __init__(self):
-        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake\apple.png'), (40, 40))
+        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (40, 40))
         self.rect = self.image.get_rect()
         self.pos = (randrange(50,screen_w, SPEED), randrange(50,screen_h, SPEED))
         self.rect.topleft = (self.pos)
     def draw_fruit(self):
         SCREEN.blit(self.image, self.rect)
     def new_fruit(self):
-        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake\apple.png'), (40, 40))
+        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (40, 40))
         self.rect = self.image.get_rect()
         self.pos = (randrange(50,screen_w, SPEED), randrange(50,screen_h, SPEED))
         self.rect.topleft = (self.pos)
@@ -74,7 +74,7 @@ def check_collision():
        fruit.new_fruit()
        snake.lenght += 1
        snake.score += 1
-       pygame.mixer.music.load(r'atributes\snake\apple_sound.mp3')
+       pygame.mixer.music.load(r'atributes\snake_folder\apple_sound.mp3')
        pygame.mixer.music.play()
     if snake.score % 2 == 0 and snake.FPS != 70:
         snake.FPS -= 5
@@ -82,10 +82,10 @@ def check_collision():
 def draw_score():
     scores = font_small.render(f'{snake.score}', True, (65, 74,12))
     score_rect = scores.get_rect(center = (60, 40))
-    apple_rect = pygame.transform.scale(pygame.image.load(r'atributes\snake\apple.png'), (25, 25)).get_rect(midright = (score_rect.left, score_rect.centery))
+    apple_rect = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (25, 25)).get_rect(midright = (score_rect.left, score_rect.centery))
     pygame.draw.rect(SCREEN, ORANGE,(apple_rect.left, apple_rect.top, apple_rect.width + score_rect.width, apple_rect.height ))
     SCREEN.blit(scores, score_rect)
-    SCREEN.blit(pygame.transform.scale(pygame.image.load(r'atributes\snake\apple.png'), (20, 20)), apple_rect)
+    SCREEN.blit(pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (20, 20)), apple_rect)
     pygame.draw.rect(SCREEN, WHITE,(apple_rect.left, apple_rect.top, apple_rect.width + score_rect.width, apple_rect.height ), 1)
 
 def check_fail():

@@ -17,6 +17,7 @@ music_files = os.listdir(music_folder)
 cover_files = os.listdir(cover_folder)
 
 pygame.mixer.init()
+
 current_track = random.randint(0, len(music_files)-1)
 # Load the image
 cover = pygame.image.load(os.path.join(cover_folder, cover_files[current_track]))
@@ -83,6 +84,7 @@ while True:
                 if boolClick(forw_rect, mouse): 
                     current_track = (current_track - 1) % len(music_files)
                     ClickEvent(current_track)
+
 
                 elif boolClick(back_rect, mouse):
                     current_track = (current_track + 1) % len(music_files)

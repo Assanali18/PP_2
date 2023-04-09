@@ -1,6 +1,7 @@
-import pygame, sys
+import pygame, sys, time
 from pygame.locals import *
-from random import randrange
+from random import randrange, choice
+from threading import Timer
 
 pygame.init()
 
@@ -18,6 +19,8 @@ screen_w = 900
 screen_h = 700
 SPEED = 50
 dx, dy = 0,0
+k = False
+
 
 
 # Fonts
@@ -35,26 +38,34 @@ background = pygame.transform.scale(background, (screen_w,screen_h))
 SCREEN = pygame.display.set_mode((screen_w, screen_h))
 pygame.display.set_caption('Snake')
 
+
+
+
 class Fruit:
     def __init__(self):
         self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (40, 40))
         self.rect = self.image.get_rect()
         self.pos = (randrange(50,screen_w, SPEED), randrange(50,screen_h, SPEED))
         self.rect.topleft = (self.pos)
+        self.W = choiceWidth()
     def draw_fruit(self):
         SCREEN.blit(self.image, self.rect)
     def new_fruit(self):
-        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (40, 40))
+        self.image = pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (self.W, self.W))
         self.rect = self.image.get_rect()
         self.pos = (randrange(50,screen_w, SPEED), randrange(50,screen_h, SPEED))
         self.rect.topleft = (self.pos)
         SCREEN.blit(self.image, self.rect)
+        self.timer = Timer(2, fruit.new_fruit)
+        
+        
 
 class Snake:
     def __init__(self):
         self.x = screen_w/2
         self.y = screen_h/2
-        self.body = [(self.x,self.y)]
+        self.body = []
+        self.body.append((self.x, self.y))
         self.lenght = 1
         self.score = 0
         self.FPS = 150
@@ -66,19 +77,34 @@ class Snake:
         self.dx, self.dy = dx, dy
         self.x += self.dx * SPEED
         self.y += self.dy * SPEED
-        self.body = self.body[-self.lenght:]
         self.body.append((self.x, self.y))
-
+        self.body = self.body[-self.lenght:]
+        
+# Chech collision
 def check_collision():
+    global timer,k
     if snake.body[-1] == fruit.pos:
-       fruit.new_fruit()
-       snake.lenght += 1
-       snake.score += 1
-       pygame.mixer.music.load(r'atributes\snake_folder\apple_sound.mp3')
-       pygame.mixer.music.play()
+        if k:
+            fruit.timer.cancel()
+            k = False
+        if fruit.W == 40: snake.score += 1
+        else: snake.score += 2
+        fruit.W = choiceWidth()
+        fruit.new_fruit()
+        if fruit.W == 50: 
+            fruit.W = choiceWidth()
+            fruit.timer.start()
+            k = True
+
+        snake.lenght += 1
+        pygame.mixer.music.load(r'atributes\snake_folder\apple_sound.mp3')
+        pygame.mixer.music.play()
+
+
     if snake.score % 2 == 0 and snake.FPS != 70:
         snake.FPS -= 5
-
+    
+# Drawing the score display
 def draw_score():
     scores = font_small.render(f'{snake.score}', True, (65, 74,12))
     score_rect = scores.get_rect(center = (60, 40))
@@ -87,13 +113,14 @@ def draw_score():
     SCREEN.blit(scores, score_rect)
     SCREEN.blit(pygame.transform.scale(pygame.image.load(r'atributes\snake_folder\apple.png'), (20, 20)), apple_rect)
     pygame.draw.rect(SCREEN, WHITE,(apple_rect.left, apple_rect.top, apple_rect.width + score_rect.width, apple_rect.height ), 1)
-
+# Game over
 def check_fail():
     if snake.x >= screen_w or snake.x < 0 or snake.y >= screen_h or snake.y < 0:
         game_over()
-    for block in snake.body[2:]:
-           if block == snake.body[0]:
-               game_over()
+    # if snake.lenght >=2:
+    for block in snake.body[:-1]:
+        if snake.x == block[0] and snake.y == block[1]:
+            game_over()
 
 def game_over():
     while True:
@@ -104,14 +131,26 @@ def game_over():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+def choiceWidth():
+    return choice([40, 40, 40, 40, 50, 40])
 
 
 
 fruit = Fruit()
 snake = Snake()
+
+
 # Boost FPS
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, snake.FPS)
+
+
+
+ 
+
+
+
+
 
 while True:        
     for event in pygame.event.get(): 
@@ -120,6 +159,7 @@ while True:
             sys.exit()
         if event.type == SCREEN_UPDATE:
             snake.move_snake(dx, dy)
+
 
     SCREEN.blit(background, (0,0))
 

@@ -26,8 +26,8 @@ font_small = pg.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
 
 # Background atributes 
-background = pg.image.load(r"atributes\racer\AnimatedStreet.png")
-pg.mixer.music.load(r'atributes\racer\background.wav')
+background = pg.image.load(r"atributes\racer_folder\AnimatedStreet.png")
+pg.mixer.music.load(r'atributes\racer_folder\background.wav')
 pg.mixer.music.play()
 
 # Creating of screen
@@ -38,7 +38,7 @@ pg.display.set_caption('Racer')
 class Player(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pg.image.load(r"atributes\racer\Player.png")
+        self.image = pg.image.load(r"atributes\racer_folder\Player.png")
         self.rect = self.image.get_rect()
         self.rect.center = (SCREEN_WIDTH/2, 500)
     
@@ -60,7 +60,7 @@ class Player(pg.sprite.Sprite):
 class Enemy(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pg.image.load(r"atributes\racer\Enemy.png")
+        self.image = pg.image.load(r"atributes\racer_folder\Enemy.png")
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(40,SCREEN_WIDTH-40), 0)
     
@@ -74,8 +74,9 @@ class Enemy(pg.sprite.Sprite):
 class Coin(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pg.image.load(r"atributes\racer\coin.png")
-        self.image = pg.transform.scale(self.image, (30,30))
+        self.image = pg.image.load(r"atributes\racer_folder\coin.png")
+        self.w = random.choice([30, 30, 30, 40, 40, 30])
+        self.image = pg.transform.scale(self.image, (self.w,self.w))
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(80, SCREEN_WIDTH-80), random.randint(SCREEN_HEIGHT/2, SCREEN_HEIGHT))
 
@@ -95,15 +96,12 @@ all_sprites.add(Player)
 all_sprites.add(Enemy)
 
 
-#Adding a new User event 
-INC_SPEED = pg.USEREVENT + 1
-pg.time.set_timer(INC_SPEED, 1000)
+
+
 
 # BODY
 while True:
-    for event in pg.event.get():
-        if event.type == INC_SPEED:
-              SPEED += 0.5      
+    for event in pg.event.get():    
         if event.type == QUIT:
             pg.quit()
             sys.exit()
@@ -121,8 +119,9 @@ while True:
         sprite.move()
         SCREEN.blit(sprite.image, sprite.rect)
 
+    # Colli
     if pg.sprite.spritecollideany(Player, enemies):
-          pg.mixer.Sound(r'atributes\racer\crash.wav').play()
+          pg.mixer.Sound(r'atributes\racer_folder\crash.wav').play()
           time.sleep(1)
           while True:
             SCREEN.fill(WHITE)
@@ -138,8 +137,16 @@ while True:
                         sys.exit()
 
     if pg.sprite.spritecollideany(Player, coins):
+        if Coin.w == 30: COINS += 1 
+        else: COINS += 2
+        Coin.w = random.choice([30, 30, 30, 40, 40, 30])
+        Coin.image = pg.image.load(r"atributes\racer_folder\coin.png")
+        Coin.image = pg.transform.scale(Coin.image, (Coin.w,Coin.w))
+        Coin.rect = Coin.image.get_rect()
         Coin.rect.center = (random.randint(80, SCREEN_WIDTH-80), random.randint(SCREEN_HEIGHT/2, SCREEN_HEIGHT))
-        COINS += 1
+        
+        if COINS % 2 == 0:
+              SPEED += 0.5 
 
     pg.display.update()
     FramePerSec.tick(60)
